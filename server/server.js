@@ -5,6 +5,12 @@ const moviesRouter = require(__dirname + '/routes/movies_routes');
 const actorsRouter = require(__dirname + '/routes/actors_routes');
 mongoose.connect(process.env.MONGOLAB_URI||'mongodb://localhost/movies_app_dev');
 
+app.use((req,res,next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5000');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
 
 app.use('/api',moviesRouter);
 
